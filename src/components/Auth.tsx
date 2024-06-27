@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
 import { BACKEND_URL } from '../constant';
 import { Link, useNavigate } from 'react-router-dom';
-import Spinner from './Spinner'; // Import Spinner component
+import Spinner from './Spinner'; 
 
 function Auth({ type }: { type: "signup" | "signin" }) {
   const navigate = useNavigate();
@@ -12,10 +12,10 @@ function Auth({ type }: { type: "signup" | "signin" }) {
     email: "",
     password: ""
   });
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); 
 
   async function sendReq() {
-    setLoading(true); // Set loading to true when request starts
+    setLoading(true);
     try {
       const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
         postInputs
@@ -27,7 +27,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
     } catch (e) {
       console.error(e);
     } finally {
-      setLoading(false); // Set loading to false after request completes
+      setLoading(false); 
     }
   }
 
@@ -68,7 +68,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
         <button
           type="button"
           onClick={sendReq}
-          className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 flex justify-center items-center"
+          className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  flex justify-center items-center"
         >
           {loading ? <Spinner /> : (type === "signup" ? "Sign up" : "Sign in")}
         </button>
@@ -92,7 +92,7 @@ function LabelledInput({ label, placeholder, type, onChange }: LabelledInputType
       <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
         <input onChange={onChange} type={type || "text"} id="first_name"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
           placeholder={placeholder} required />
       </div>
     </div>
