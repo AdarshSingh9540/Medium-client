@@ -34,12 +34,13 @@ function Auth({ type }: { type: "signup" | "signin" }) {
   return (
     <div>
       <div className='text-3xl font-extrabold '>
-        Create An Account
+        {type === "signup" ? "Create An Account" : "Sign In"}
       </div>
       <div className='text-slate-400 mt-1'>
-        {type === "signin" ? "Don't have an account" : "Already have an account ?"}
+        {type === "signin" ? "Don't have an account?" : "Already have an account?"}
         <Link className='pl-3 underline cursor-pointer' to={type === "signin" ? "/signup" : "/signin"}>
-          {type === "signin" ? "sign up" : "sign in"}</Link>
+          {type === "signin" ? "Sign up" : "Sign in"}
+        </Link>
       </div>
       <div className='mt-6'>
         {type === "signup" ? <LabelledInput label="Name" placeholder='Adarsh Singh' onChange={(e) => {
@@ -49,13 +50,12 @@ function Auth({ type }: { type: "signup" | "signin" }) {
           })
         }} /> : null}
 
-        <LabelledInput label="email" placeholder='adarsh2gmail.com' onChange={(e) => {
+        <LabelledInput label="Email" placeholder='adarsh2gmail.com' onChange={(e) => {
           setPostInputs({
             ...postInputs,
             email: e.target.value
           })
         }} />
-
 
         <LabelledInput label="Password" placeholder='12345' type={"password"} onChange={(e) => {
           setPostInputs({
@@ -70,7 +70,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
           onClick={sendReq}
           className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 flex justify-center items-center"
         >
-          {loading ? <Spinner /> : (type === "signup" ? "sign up" : "sign in")}
+          {loading ? <Spinner /> : (type === "signup" ? "Sign up" : "Sign in")}
         </button>
       </div>
     </div>
