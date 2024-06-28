@@ -41,9 +41,9 @@ export const Navbar = () => {
                 <Avatar name={userName} />
               </span>
               {showDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                <div className="absolute right-0 mt-2  bg-white divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 w-40 lg:w-60 ">
                   <div className="px-4 py-3">
-                    <p className="text-sm text-gray-900">Signed in as {userName}</p>
+                    <p className="text-sm px-4 text-gray-900 font-medium"> <span className="hidden lg:inline text-md">signed in as</span> {userName}</p>
                   </div>
                   <div className="py-1">
                     <button
@@ -51,7 +51,7 @@ export const Navbar = () => {
                         setShowDropdown(false);
                         navigate('/blogs');
                       }}
-                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="block font-semibold w-full px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     >
                       Home
                     </button>
@@ -60,7 +60,7 @@ export const Navbar = () => {
                         setShowDropdown(false);
                         handleSignOut();
                       }}
-                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="font-semibold block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     >
                       Sign out
                     </button>
