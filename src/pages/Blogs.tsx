@@ -1,6 +1,6 @@
 
 import { BlogCard } from "../components/BlogCard"
-import  Navbar  from "../components/Navbar"
+import { Navbar } from "../components/Navbar"
 import Shimmer from "../components/Shimmer";
 import { useBlogs } from "../hooks"
 

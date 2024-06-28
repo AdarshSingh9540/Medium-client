@@ -2,12 +2,12 @@ import  { useState } from "react";
 import { Link } from "react-router-dom";
 import { Avatar } from "./BlogCard";
 
-const Navbar = () => {
+export const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleSignOut = () => {
     localStorage.removeItem("name");
-    window.location.replace('/signup'); // Ensure '/signup' is the correct path
+    window.location.replace('/signup'); 
   };
 
   const userName = localStorage.getItem("name");
@@ -41,7 +41,7 @@ const Navbar = () => {
                 className="cursor-pointer"
                 onClick={toggleDropdown}
                 onBlur={closeDropdown}
-                tabIndex={0} // to make it focusable
+                tabIndex={0} 
               >
                 <Avatar name={userName} />
               </span>
@@ -78,4 +78,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+
