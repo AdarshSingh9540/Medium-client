@@ -11,9 +11,9 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
           <div className="text-2xl lg:text-5xl font-extrabold">
             {blog.title}
           </div>
-          <div className="flex items-center text-slate-500 pt-4"> {/* Use flex items-center for horizontal alignment */}
+          <div className="flex items-center text-slate-500 pt-4">
             <Circle />
-            <span className="pl-2">Post on 22nd June 2024</span> {/* Add spacing for readability */}
+            <span className="pl-2">Post on 22nd June 2024</span> 
           </div>
           <div className="text-lg pt-5">
             {blog.content}

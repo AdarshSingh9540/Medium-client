@@ -42,8 +42,8 @@ export const Navbar = () => {
               </span>
               {showDropdown && (
                 <div className="absolute right-0 mt-2  bg-white divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 w-40 lg:w-60 ">
-                  <div className="px-4 py-3">
-                    <p className="text-sm px-4 text-gray-900 font-medium"> <span className="hidden lg:inline text-md">signed in as</span> {userName}</p>
+                  <div className="px-4 py-2">
+                    <p className="text-sm px-10 lg:px-4 text-gray-900 font-medium"> <span className="hidden lg:inline text-md">signed in as</span> {userName}</p>
                   </div>
                   <div className="py-1">
                     <button
