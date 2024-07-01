@@ -20,7 +20,7 @@ export const Navbar = () => {
   return (
     <div className="border-b flex justify-between px-10 py-4">
       <Link to="/blogs">
-        <div className="font-bold text-lg">Medium</div>
+        <div className="font-bold text-lg">IndiBlog</div>
       </Link>
       <div className="relative">
         <div className="flex items-center">
