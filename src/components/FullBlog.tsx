@@ -6,9 +6,9 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
       <Navbar />
-      <div className="lg:grid lg:grid-cols-12 p-8 pt-6">
-        <div className="col-span-8">
-          <div className="text-2xl lg:text-5xl font-extrabold">
+      <div className="lg:grid lg:grid-cols-12 p-8 pt-6 ">
+        <div className="col-span-8 lg:ml-4 lg:mr-8">
+          <div className="text-2xl lg:text-4xl font-extrabold">
             {blog.title}
           </div>
           <div className="flex items-center text-slate-500 pt-4">
