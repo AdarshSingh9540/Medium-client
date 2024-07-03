@@ -2,7 +2,7 @@ import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
 import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Publish = () => {
   const [title, setTitle] = useState("");
@@ -49,6 +49,11 @@ export const Publish = () => {
             >
               Publish post
             </button>
+            <div >
+          <Link to='/ai'>
+          <button className="bg-green-500 p-2 rounded-lg mt-6">Generate using ai</button>
+          </Link>
+          </div>
           </div>
         </div>
       </div>
