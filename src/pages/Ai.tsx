@@ -19,14 +19,21 @@ export const Ai = () => {
         },
         body: JSON.stringify({ title: title }), 
       });
-
+  
       const data = await response.json();
       console.log(data);
-      setDescription(data.response);
+  
+      // Split the description by '\n' to ensure each line is on a new line
+      const formattedDescription = data.response.split('\n').map((line:any, index:any) => (
+        <p key={index} className="text-lg text-gray-700">{line}</p>
+      ));
+  
+      setDescription(formattedDescription);
     } catch (error) {
       console.error('Error while fetching:', error);
     }
   };
+  
 
   useEffect(() => {
    
