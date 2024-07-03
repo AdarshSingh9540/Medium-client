@@ -9,7 +9,7 @@ export const Ai = () => {
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
-  // Function to fetch text from an external source
+
   const blog = async () => {
     try {
       const response = await fetch("https://ai-server-blush.vercel.app/chat", {
@@ -22,14 +22,14 @@ export const Ai = () => {
 
       const data = await response.json();
       console.log(data);
-      setDescription(data.response); // Use 'data.response' instead of 'data.text'
+      setDescription(data.response);
     } catch (error) {
       console.error('Error while fetching:', error);
     }
   };
 
   useEffect(() => {
-    // Optional: You may want to call blog() here on component mount or based on certain conditions
+   
   }, []);
 
   const publishPost = async () => {
@@ -53,7 +53,6 @@ export const Ai = () => {
   };
 
   const handleCopyText = () => {
-    // Create a temporary textarea element to copy text to clipboard
     const textarea = document.createElement('textarea');
     textarea.value = description;
     document.body.appendChild(textarea);
@@ -79,7 +78,7 @@ export const Ai = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
             <div className="mt-4">
-              {/* Render fetched description here */}
+             
               {description && (
                 <div>
                   <h3 className="text-xl font-bold  mb-2">Generated Text:</h3>
@@ -104,7 +103,7 @@ export const Ai = () => {
               )}
             </div>
             <button
-              onClick={blog} // Call the 'blog' function on click
+              onClick={blog} 
               className="mt-6 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-green-700"
             >
               Generate
