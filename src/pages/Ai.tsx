@@ -3,14 +3,17 @@ import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 export const Ai = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
 
   const blog = async () => {
+    setLoading(true);
     try {
       const response = await fetch("https://ai-server-blush.vercel.app/chat", {
         method: 'POST',
@@ -31,6 +34,9 @@ export const Ai = () => {
       setDescription(formattedDescription);
     } catch (error) {
       console.error('Error while fetching:', error);
+    }
+    finally {
+      setLoading(false); 
     }
   };
   
@@ -85,29 +91,31 @@ export const Ai = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
             <div className="mt-4">
-             
-              {description && (
-                <div>
-                  <h3 className="text-xl font-bold  mb-2">Generated Text:</h3>
-                  <p className="text-lg text-gray-700">{description}</p>
-                  <div className="flex mt-6 ">
-                    <Link to={'/publish'}>
-                    <button
-                      onClick={publishPost}
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-                    >
-                 <span className="text-white mr-2">⬅</span> Back to Publish page
-                    </button>
-                    </Link>
-                    <button
-                      onClick={handleCopyText}
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 ml-4"
-                    >
-                      Copy
-                    </button>
+              {
+                loading ? (<Spinner/>):(description && (
+                  <div>
+                    <h3 className="text-xl font-bold  mb-2">Generated Text:</h3>
+                    <p className="text-lg text-gray-700">{description}</p>
+                    <div className="flex mt-6 ">
+                      <Link to={'/publish'}>
+                      <button
+                        onClick={publishPost}
+                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+                      >
+                   <span className="text-white mr-2">⬅</span> Back to Publish page
+                      </button>
+                      </Link>
+                      <button
+                        onClick={handleCopyText}
+                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 ml-4"
+                      >
+                        Copy
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
+                ))
+              }
+             
             </div>
             <button
               onClick={blog} 
