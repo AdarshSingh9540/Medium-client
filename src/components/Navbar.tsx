@@ -20,7 +20,9 @@ export const Navbar = () => {
   return (
     <div className="border-b flex justify-between px-10 py-4">
       <Link to="/blogs">
-        <div className="font-bold text-lg">IndiBlog</div>
+        <div className="font-bold text-sm lg:text-md">
+           <img className="w-8 " src="https://static.thenounproject.com/png/19895-200.png" alt="" />
+          IndiBlog</div>
       </Link>
       <div className="relative">
         <div className="flex items-center">
