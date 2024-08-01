@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import SideBar from "../components/SideBar";
 
 export const Publish = () => {
   const [title, setTitle] = useState("");
@@ -10,11 +11,15 @@ export const Publish = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="">
+    <div className="pt-20">
       <Navbar />
       <div className="mx-4">
-        <div className="flex justify-center w-full pt-8">
-          <div className="max-w-screen-lg w-full">
+        <div className="flex flex-row justify-center w-full pt-8">
+         
+          <div className="hidden lg:block">
+            <SideBar />
+          </div>
+          <div className="max-w-screen-lg w-full lg:pl-24">
             <input
               type="text"
               id="helper-text"
@@ -49,11 +54,11 @@ export const Publish = () => {
             >
               Publish post
             </button>
-            <div >
-          <Link to='/ai'>
-          <button className="bg-green-500 p-2 rounded-lg mt-6">Generate using ai</button>
-          </Link>
-          </div>
+            <div>
+              <Link to='/ai'>
+                <button className="bg-green-500 p-2 rounded-lg mt-6">Generate using ai</button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

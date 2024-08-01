@@ -1,5 +1,6 @@
 import { FullBlog } from "../components/FullBlog";
 import { Navbar } from "../components/Navbar";
+import SideBar from "../components/SideBar";
 
 import Spinner from "../components/Spinner";
 import { useBlog } from "../hooks";
@@ -28,7 +29,12 @@ export const Blog = () => {
 
   return (
     <div>
-      <FullBlog blog={blog} />
+      <div className="hidden lg:block">
+            <SideBar />
+          </div>
+        <div className="my-20 lg:ml-64">
+        <FullBlog blog={blog} />
+        </div>
     </div>
   );
 };

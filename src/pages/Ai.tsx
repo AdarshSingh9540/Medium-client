@@ -1,16 +1,22 @@
+import  { useState } from 'react';
 import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import { Menu, X } from 'lucide-react';
+import SideBar from '../components/SideBar';
 
 export const Ai = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   const blog = async () => {
     setLoading(true);
@@ -20,30 +26,23 @@ export const Ai = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title: title }), 
+        body: JSON.stringify({ title: title }),
       });
-  
+
       const data = await response.json();
       console.log(data);
-  
-      // Split the description by '\n' to ensure each line is on a new line
+
       const formattedDescription = data.response.split('\n').map((line:any, index:any) => (
         <p key={index} className="text-lg text-gray-700">{line}</p>
       ));
-  
+
       setDescription(formattedDescription);
     } catch (error) {
       console.error('Error while fetching:', error);
-    }
-    finally {
-      setLoading(false); 
+    } finally {
+      setLoading(false);
     }
   };
-  
-
-  useEffect(() => {
-   
-  }, []);
 
   const publishPost = async () => {
     try {
@@ -76,11 +75,20 @@ export const Ai = () => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col h-screen">
+      <div className=''>
       <Navbar />
-      <div className="mx-4">
-        <div className="flex justify-center w-full pt-8">
-          <div className="max-w-screen-lg w-full">
+        
+      </div>
+      
+      <div className="flex flex-1 overflow-hidden pt-10 lg:pt-20">
+      <div className="hidden lg:block">
+            <SideBar />
+          </div>
+        <div className="flex-1 p-4 overflow-y-auto">
+
+
+          <div className="max-w-screen-lg lg:pl-24 mx-auto mt-8 lg:mt-0">
             <input
               type="text"
               id="helper-text"
@@ -91,34 +99,35 @@ export const Ai = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
             <div className="mt-4">
-              {
-                loading ? (<Spinner/>):(description && (
+              {loading ? (
+                <Spinner />
+              ) : (
+                description && (
                   <div>
-                    <h3 className="text-xl font-bold  mb-2">Generated Text:</h3>
+                    <h3 className="text-xl font-bold mb-2">Generated Text:</h3>
                     <p className="text-lg text-gray-700">{description}</p>
-                    <div className="flex mt-6 ">
-                      <Link to={'/publish'}>
-                      <button
-                        onClick={publishPost}
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-                      >
-                   <span className="text-white mr-2">⬅</span> Back to Publish page
-                      </button>
+                    <div className="flex flex-wrap mt-6 gap-2">
+                      <Link to="/publish">
+                        <button
+                          onClick={publishPost}
+                          className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+                        >
+                          <span className="text-white mr-2">⬅</span> Back to Publish page
+                        </button>
                       </Link>
                       <button
                         onClick={handleCopyText}
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 ml-4"
+                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
                       >
                         Copy
                       </button>
                     </div>
                   </div>
-                ))
-              }
-             
+                )
+              )}
             </div>
             <button
-              onClick={blog} 
+              onClick={blog}
               className="mt-6 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-green-700"
             >
               Generate

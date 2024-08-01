@@ -2,6 +2,7 @@
 import { BlogCard } from "../components/BlogCard"
 import { Navbar } from "../components/Navbar"
 import Shimmer from "../components/Shimmer";
+import SideBar from "../components/SideBar";
 import { useBlogs } from "../hooks"
 
 
@@ -26,8 +27,10 @@ function Blogs() {
   return (
     <div>
         <Navbar/>
-        <div className="flex justify-center ">
-          
+        <div className="hidden lg:block">
+            <SideBar />
+          </div>
+        <div className="flex justify-center pt-10 lg:pt-16">
         <div className=" py-7  ">
        {blogs.map(blog => 
     <div className="mt-5">
