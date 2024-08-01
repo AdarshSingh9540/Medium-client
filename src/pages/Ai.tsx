@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
@@ -9,9 +9,9 @@ import SideBar from '../components/SideBar';
 export const Ai = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [plainTextDescription, setPlainTextDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
 
   const blog = async () => {
     setLoading(true);
@@ -27,10 +27,11 @@ export const Ai = () => {
       const data = await response.json();
       console.log(data);
 
+      setPlainTextDescription(data.response);
+
       const formattedDescription = data.response.split('\n').map((line:any, index:any) => (
         <p key={index} className="text-lg text-gray-700">{line}</p>
       ));
-
       setDescription(formattedDescription);
     } catch (error) {
       console.error('Error while fetching:', error);
@@ -45,7 +46,7 @@ export const Ai = () => {
         `${BACKEND_URL}/api/v1/blog`,
         {
           title,
-          content: description,
+          content: plainTextDescription,
         },
         {
           headers: {
@@ -61,7 +62,7 @@ export const Ai = () => {
 
   const handleCopyText = () => {
     const textarea = document.createElement('textarea');
-    textarea.value = description;
+    textarea.value = plainTextDescription; // Copy the plain text description
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand('copy');
@@ -71,18 +72,15 @@ export const Ai = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className=''>
-      <Navbar />
-        
+      <div>
+        <Navbar />
       </div>
       
       <div className="flex flex-1 overflow-hidden pt-10 lg:pt-20">
-      <div className="hidden lg:block">
-            <SideBar />
-          </div>
+        <div className="hidden lg:block">
+          <SideBar />
+        </div>
         <div className="flex-1 p-4 overflow-y-auto">
-
-
           <div className="max-w-screen-lg lg:pl-24 mx-auto mt-8 lg:mt-0">
             <input
               type="text"
@@ -100,7 +98,7 @@ export const Ai = () => {
                 description && (
                   <div>
                     <h3 className="text-xl font-bold mb-2">Generated Text:</h3>
-                    <p className="text-lg text-gray-700">{description}</p>
+                    <div>{description}</div>
                     <div className="flex flex-wrap mt-6 gap-2">
                       <Link to="/publish">
                         <button
