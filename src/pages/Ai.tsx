@@ -4,19 +4,14 @@ import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import { Menu, X } from 'lucide-react';
 import SideBar from '../components/SideBar';
 
 export const Ai = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   const blog = async () => {
     setLoading(true);
