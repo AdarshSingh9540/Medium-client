@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 interface BlogCardProps {
-  authorName: string;
+  authorName: string; // Now, this can be populated from the author object in the blog
   title: string;
   content: string;
-  publishedDate: string;
+  publishedDate: string; // This should be passed when rendering the BlogCard
   id: number;
 }
 
@@ -13,7 +13,7 @@ export const BlogCard = ({
   authorName,
   title,
   content,
-  publishedDate
+  publishedDate,
 }: BlogCardProps) => {
   return (
     <Link to={`/blog/${id}`}>
@@ -30,10 +30,10 @@ export const BlogCard = ({
       </div>
     </Link>
   );
-}
+};
 
 export function Avatar({ name }: { name: string }) {
-    const initials = name ? name.charAt(0).toUpperCase() : '?';
+  const initials = name ? name.charAt(0).toUpperCase() : '?';
 
   return (
     <div className="relative inline-flex items-center justify-center w-7 h-7 overflow-hidden bg-gray-400 rounded-full dark:bg-gray-600">
@@ -43,8 +43,3 @@ export function Avatar({ name }: { name: string }) {
     </div>
   );
 }
-
-
-
-
-
