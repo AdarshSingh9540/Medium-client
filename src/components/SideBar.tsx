@@ -1,4 +1,4 @@
-import  { useState } from "react"
+import  { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Home, PenTool, Cpu, LogIn, UserPlus, X, LogOut } from "lucide-react"
 
@@ -9,12 +9,23 @@ interface SideBarProps {
 
 function SideBar({ isOpen, toggleSidebar }: SideBarProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    const name = localStorage.getItem('name')
+    if (token && name) {
+      setIsAuthenticated(true)
+   
+    }
+  }, [])
 
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('name')
     setIsAuthenticated(false)
+
     navigate('/signin')
   }
 
