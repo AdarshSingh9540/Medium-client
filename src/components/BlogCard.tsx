@@ -13,7 +13,7 @@ interface BlogCardProps {
 
 export const BlogCard = ({ id, authorName, title, content, publishedDate }: BlogCardProps) => {
   const [isHovered, setIsHovered] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(false) // New state to toggle content
+  const [isExpanded] = useState(false)
 
   const stripHtmlTags = (html: string) => {
     const tempDiv = document.createElement('div')
@@ -22,7 +22,7 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
   }
 
   const cleanContent = stripHtmlTags(content)
-  const previewContent = cleanContent.slice(0, 250) // Limit the content preview to 150 characters
+  const previewContent = cleanContent.slice(0, 250) 
 
   return (
     <Link to={`/blog/${id}`}>

@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Blog } from "../hooks/index"
 import parse from 'html-react-parser'
 import { motion } from 'framer-motion'
 import { CalendarDays, Clock, ChevronLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-// Define the Blog interface if not already done
 interface BlogSchema {
   title: string
   content: string
