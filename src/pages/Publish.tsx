@@ -1,13 +1,14 @@
 import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SideBar from "../components/SideBar";
+import { Editor } from 'primereact/editor'; 
 
 export const Publish = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(""); 
   const navigate = useNavigate();
 
   return (
@@ -15,31 +16,35 @@ export const Publish = () => {
       <Navbar />
       <div className="mx-4">
         <div className="flex flex-row justify-center w-full pt-8">
-         
           <div className="hidden lg:block">
             <SideBar />
           </div>
-          <div className="max-w-screen-lg w-full lg:pl-24">
+          <div  className="max-w-screen-lg w-full lg:pl-24">
             <input
               type="text"
               id="helper-text"
               aria-describedby="helper-text-explanation"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4" // Added mb-4 for bottom margin
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4" 
               placeholder="Title"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
+              onChange={(e) => setTitle(e.target.value)}
             />
-            <TextEditor onChange={(e) => {
-              setDescription(e.target.value);
-            }} />
+
+  
+            <div className="mb-4">
+              <Editor
+                value={description}
+                onTextChange={(e) => setDescription(e.htmlValue || "")} 
+                style={{ height: '300px' }}
+              />
+            </div>
+
             <button
               onClick={async () => {
                 const response = await axios.post(
                   `${BACKEND_URL}/api/v1/blog`,
                   {
                     title,
-                    content: description,
+                    content: description, 
                   },
                   {
                     headers: {
@@ -56,7 +61,7 @@ export const Publish = () => {
             </button>
             <div>
               <Link to='/ai'>
-                <button className="bg-green-500 p-2 rounded-lg mt-6">Generate using ai</button>
+                <button className="bg-green-500 p-2 rounded-lg mt-6">Generate using AI</button>
               </Link>
             </div>
           </div>
@@ -65,25 +70,3 @@ export const Publish = () => {
     </div>
   );
 };
-
-function TextEditor({ onChange }: { onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void }) {
-  return (
-    <form>
-      <div className="w-full mb-4">
-        <div className="flex items-center justify-between px-3 py-2 border">
-          <div className="py-2 bg-white rounded-b-lg w-full">
-            <label className="sr-only">Publish post</label>
-            <textarea
-              onChange={onChange}
-              id="editor"
-              rows={8}
-              className="focus:outline-none pl-2 block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:ring-0"
-              placeholder="Write an article..."
-              required
-            ></textarea>
-          </div>
-        </div>
-      </div>
-    </form>
-  );
-}

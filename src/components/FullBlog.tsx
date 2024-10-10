@@ -1,6 +1,7 @@
 import { Blog } from "../hooks";
 import { Avatar } from "./BlogCard";
 import { Navbar } from "./Navbar";
+import parse from 'html-react-parser'; 
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
   return (
@@ -16,7 +17,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
             <span className="pl-2">Post on 22nd June 2024</span> 
           </div>
           <div className="text-lg pt-5">
-            {blog.content}
+            {parse(blog.content)} 
           </div>
         </div>
         <div className="col-span-4 pt-6">
@@ -47,4 +48,3 @@ function Circle() {
     <div className="rounded-full bg-slate-700 h-2 w-2"></div>
   );
 }
-

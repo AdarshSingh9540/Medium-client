@@ -38,7 +38,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
       </div>
       <div className='text-slate-400 mt-1'>
         {type === "signin" ? "Don't have an account?" : "Already have an account?"}
-        <Link className='pl-3 underline cursor-pointer' to={type === "signin" ? "/signup" : "/signin"}>
+        <Link className='pl-3 underline cursor-pointer' to={type === "signin" ? "/" : "/signin"}>
           {type === "signin" ? "Sign up" : "Sign in"}
         </Link>
       </div>

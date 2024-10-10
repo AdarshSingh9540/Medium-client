@@ -12,7 +12,7 @@ function SideBar() {
       <button
         onClick={toggleSidebar}
         type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-700 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-700 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  "
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -32,18 +32,18 @@ function SideBar() {
 
       {/* Sidebar content */}
       <aside
-        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0 mt-16`}
+        className={`fixed top-0 left-0 z-40 w-56 h-screen transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0 mt-16 `}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 pt-6">
-          <ul className="space-y-2 font-medium">
+        <div className="h-full px-3 py-4 overflow-y-auto border-r-2 border-gray-200 pt-10">
+          <ul className="space-y-3 space-x-3 font-medium">
             <li>
               <Link
                 to="/blogs"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  mx-2 group"
               >
                 <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -58,10 +58,10 @@ function SideBar() {
             <li>
               <Link
                 to="/publish"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group"
               >
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -75,10 +75,10 @@ function SideBar() {
             <li>
               <Link
                 to="/ai"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group"
               >
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -90,13 +90,14 @@ function SideBar() {
                
               </Link>
             </li>
+            <div className=" px-12 border-b-2 border-gray-200"></div>
             <li>
               <Link
                 to="/signin"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100  group"
               >
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -116,10 +117,10 @@ function SideBar() {
             <li>
               <Link
                 to="/signup"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group"
               >
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"

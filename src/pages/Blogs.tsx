@@ -12,7 +12,7 @@ function Blogs() {
         return <div>
           <Navbar/>
           <div className="w-full flex justify-center ">
-           <div className="w-[60%] py-7 my-4 lg:my-10 mt-3">
+           <div className="w-[65%] py-7 my-4 lg:my-10 mt-3">
            <Shimmer/>
             <Shimmer/>
             <Shimmer/>

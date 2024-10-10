@@ -23,13 +23,19 @@ export const Ai = () => {
         },
         body: JSON.stringify({ title: title }),
       });
-
+  
       const data = await response.json();
       console.log(data);
-
-      setPlainTextDescription(data.response);
-
-      const formattedDescription = data.response.split('\n').map((line:any, index:any) => (
+  
+      const cleanedResponse = data.response
+        .replace(/##/g, '') 
+        .replace(/[\*#\/]/g, '') 
+        .replace(/[^\w\s,.!?'-]/g, '') 
+        .trim(); 
+  
+      setPlainTextDescription(cleanedResponse);
+  
+      const formattedDescription = cleanedResponse.split('\n').map((line:any, index:any) => (
         <p key={index} className="text-lg text-gray-700">{line}</p>
       ));
       setDescription(formattedDescription);
@@ -39,7 +45,7 @@ export const Ai = () => {
       setLoading(false);
     }
   };
-
+  
   const publishPost = async () => {
     try {
       const response = await axios.post(
@@ -62,7 +68,7 @@ export const Ai = () => {
 
   const handleCopyText = () => {
     const textarea = document.createElement('textarea');
-    textarea.value = plainTextDescription; // Copy the plain text description
+    textarea.value = plainTextDescription; 
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand('copy');
@@ -100,19 +106,20 @@ export const Ai = () => {
                     <h3 className="text-xl font-bold mb-2">Generated Text:</h3>
                     <div>{description}</div>
                     <div className="flex flex-wrap mt-6 gap-2">
-                      <Link to="/publish">
-                        <button
-                          onClick={publishPost}
-                          className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-                        >
-                          <span className="text-white mr-2">⬅</span> Back to Publish page
-                        </button>
+                      <Link to="/publish" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                        <span className="text-white mr-2">⬅</span> Back to Publish page
                       </Link>
                       <button
                         onClick={handleCopyText}
                         className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
                       >
                         Copy
+                      </button>
+                      <button
+                        onClick={publishPost} // Publish the post when this button is clicked
+                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-green-700"
+                      >
+                        Publish Blog
                       </button>
                     </div>
                   </div>
