@@ -1,6 +1,5 @@
 import { FullBlog } from "../components/FullBlog";
-import { Navbar } from "../components/Navbar";
-import SideBar from "../components/SideBar";
+
 
 import Spinner from "../components/Spinner";
 import { useBlog } from "../hooks";
@@ -12,7 +11,6 @@ export const Blog = () => {
 
   if (loading) {
     return <div>
-    <Navbar/>
      <div className="h-screen flex flex-col justify-center">
       <div className="flex justify-center">
         <Spinner/>
@@ -29,10 +27,7 @@ export const Blog = () => {
 
   return (
     <div>
-      <div className="hidden lg:block">
-            <SideBar />
-          </div>
-        <div className="my-20 lg:ml-64">
+        <div >
         <FullBlog blog={blog} />
         </div>
     </div>

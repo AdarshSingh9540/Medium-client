@@ -1,70 +1,59 @@
 import axios from "axios";
-import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SideBar from "../components/SideBar";
-import { Editor } from 'primereact/editor'; 
+import { Editor } from 'primereact/editor';
 
 export const Publish = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState(""); 
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
   return (
-    <div className="pt-20">
-      <Navbar />
-      <div className="mx-4">
-        <div className="flex flex-row justify-center w-full pt-8">
-          <div className="hidden lg:block">
-            <SideBar />
-          </div>
-          <div  className="max-w-screen-lg w-full lg:pl-24">
-            <input
-              type="text"
-              id="helper-text"
-              aria-describedby="helper-text-explanation"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4" 
-              placeholder="Title"
-              onChange={(e) => setTitle(e.target.value)}
-            />
+    <div className="mx-auto max-w-4xl px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Create a New Post</h1>
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <input
+          type="text"
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-500"
+          placeholder="Enter your title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-  
-            <div className="mb-4">
-              <Editor
-                value={description}
-                onTextChange={(e) => setDescription(e.htmlValue || "")} 
-                style={{ height: '300px' }}
-              />
-            </div>
+        <div className="mt-4">
+          <Editor
+            value={description}
+            onTextChange={(e) => setDescription(e.htmlValue || "")}
+            style={{ height: '300px' }}
+          />
+        </div>
 
-            <button
-              onClick={async () => {
-                const response = await axios.post(
-                  `${BACKEND_URL}/api/v1/blog`,
-                  {
-                    title,
-                    content: description, 
+        <div className="mt-6 flex flex-wrap gap-4">
+          <button
+            onClick={async () => {
+              const response = await axios.post(
+                `${BACKEND_URL}/api/v1/blog`,
+                {
+                  title,
+                  content: description,
+                },
+                {
+                  headers: {
+                    Authorization: localStorage.getItem("token"),
                   },
-                  {
-                    headers: {
-                      Authorization: localStorage.getItem("token"),
-                    },
-                  }
-                );
-                navigate(`/blog/${response.data.id}`);
-              }}
-              type="submit"
-              className="mt-4 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-            >
-              Publish post
+                }
+              );
+              navigate(`/blog/${response.data.id}`);
+            }}
+            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300"
+          >
+            Publish post
+          </button>
+          <Link to='/ai'>
+            <button className="px-6 py-2 bg-gradient-to-r from-purple-400 to-pink-500 text-white rounded-lg hover:from-purple-500 hover:to-pink-600 transition duration-300">
+              Generate using AI
             </button>
-            <div>
-              <Link to='/ai'>
-                <button className="bg-green-500 p-2 rounded-lg mt-6">Generate using AI</button>
-              </Link>
-            </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

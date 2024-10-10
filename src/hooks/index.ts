@@ -2,11 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../constant";
 
+
 // Define the Blog interface
 export interface Blog {
   content: string;
   title: string;
   id: number;
+  publishedDate: string;
   author: {
     name: string;
   };
@@ -31,6 +33,7 @@ export const useBlog = ({ id }: { id: string }) => {
           id: fetchedBlog.id,
           content: fetchedBlog.content,
           title: fetchedBlog.title,
+          publishedDate: fetchedBlog.publishedDate,
           // authorId: fetchedBlog.authorId,
           author: {
             name: "Adarsh Singh", // Replace with actual author name if available
@@ -76,6 +79,7 @@ export const useBlogs = () => {
           id: blog.id,
           content: blog.content,
           title: blog.title,
+        
           author: {
             name: "Adarsh Singh", // Replace with actual author name if available
           },

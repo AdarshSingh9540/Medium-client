@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import axios from "axios";
-import { Navbar } from "../components/Navbar";
 import { BACKEND_URL } from "../constant";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import SideBar from '../components/SideBar';
 
 export const Ai = () => {
   const [title, setTitle] = useState("");
@@ -28,15 +26,15 @@ export const Ai = () => {
       console.log(data);
   
       const cleanedResponse = data.response
-        .replace(/##/g, '') 
-        .replace(/[\*#\/]/g, '') 
-        .replace(/[^\w\s,.!?'-]/g, '') 
-        .trim(); 
+        .replace(/##/g, '')
+        .replace(/[\*#\/]/g, '')
+        .replace(/[^\w\s,.!?'-]/g, '')
+        .trim();
   
       setPlainTextDescription(cleanedResponse);
   
       const formattedDescription = cleanedResponse.split('\n').map((line:any, index:any) => (
-        <p key={index} className="text-lg text-gray-700">{line}</p>
+        <p key={index} className="text-lg text-gray-700 mb-2">{line}</p>
       ));
       setDescription(formattedDescription);
     } catch (error) {
@@ -68,7 +66,7 @@ export const Ai = () => {
 
   const handleCopyText = () => {
     const textarea = document.createElement('textarea');
-    textarea.value = plainTextDescription; 
+    textarea.value = plainTextDescription;
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand('copy');
@@ -77,63 +75,51 @@ export const Ai = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <div>
-        <Navbar />
-      </div>
-      
-      <div className="flex flex-1 overflow-hidden pt-10 lg:pt-20">
-        <div className="hidden lg:block">
-          <SideBar />
+    <div className="mx-auto max-w-4xl px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">AI-Generated Content</h1>
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <input
+          type="text"
+          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-500"
+          placeholder="Enter title for generating blog"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <div className="mt-4">
+          {loading ? (
+            <Spinner />
+          ) : (
+            description && (
+              <div>
+                <h3 className="text-xl font-bold mb-4">Generated Text:</h3>
+                <div className="bg-gray-50 p-4 rounded-lg">{description}</div>
+                <div className="flex flex-wrap mt-6 gap-2">
+                  <Link to="/publish" className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">
+                    ⬅ Back to Publish
+                  </Link>
+                  <button
+                    onClick={handleCopyText}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                  >
+                    Copy
+                  </button>
+                  <button
+                    onClick={publishPost}
+                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"
+                  >
+                    Publish Blog
+                  </button>
+                </div>
+              </div>
+            )
+          )}
         </div>
-        <div className="flex-1 p-4 overflow-y-auto">
-          <div className="max-w-screen-lg lg:pl-24 mx-auto mt-8 lg:mt-0">
-            <input
-              type="text"
-              id="helper-text"
-              aria-describedby="helper-text-explanation"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-4"
-              placeholder="Enter title name for generating blog"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <div className="mt-4">
-              {loading ? (
-                <Spinner />
-              ) : (
-                description && (
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">Generated Text:</h3>
-                    <div>{description}</div>
-                    <div className="flex flex-wrap mt-6 gap-2">
-                      <Link to="/publish" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                        <span className="text-white mr-2">⬅</span> Back to Publish page
-                      </Link>
-                      <button
-                        onClick={handleCopyText}
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-                      >
-                        Copy
-                      </button>
-                      <button
-                        onClick={publishPost} // Publish the post when this button is clicked
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-green-700"
-                      >
-                        Publish Blog
-                      </button>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-            <button
-              onClick={blog}
-              className="mt-6 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-green-700"
-            >
-              Generate
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={blog}
+          className="mt-6 px-6 py-2 bg-gradient-to-r from-purple-400 to-pink-500 text-white rounded-lg hover:from-purple-500 hover:to-pink-600 transition duration-300"
+        >
+          Generate
+        </button>
       </div>
     </div>
   );
