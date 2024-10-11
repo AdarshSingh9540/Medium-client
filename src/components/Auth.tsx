@@ -24,6 +24,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
       localStorage.setItem("token", jwt);
       localStorage.setItem("name", postInputs.name || "");
       navigate("/blogs");
+    
     } catch (e) {
       console.error(e);
     } finally {
@@ -68,7 +69,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
         <button
           type="button"
           onClick={sendReq}
-          className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  flex justify-center items-center"
+          className="w-full mt-4 text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  flex justify-center items-center"
         >
           {loading ? <Spinner /> : (type === "signup" ? "Sign up" : "Sign in")}
         </button>

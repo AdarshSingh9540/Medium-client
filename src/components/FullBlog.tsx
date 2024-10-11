@@ -3,6 +3,7 @@ import parse from 'html-react-parser'
 import { motion } from 'framer-motion'
 import { CalendarDays, Clock, ChevronLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import Confetti from "react-dom-confetti";
 
 interface BlogSchema {
   title: string
@@ -20,15 +21,35 @@ interface FullBlogProps {
   blog: BlogSchema
 }
 
+
 export const FullBlog = ({ blog }: FullBlogProps) => {
   const [readingTime, setReadingTime] = useState<number>(0)
+  const [isFollowing,setIsFollowing] = useState(false);
 
   useEffect(() => {
-    const text = blog.content.replace(/<[^>]*>?/gm, '') // Remove HTML tags
+    const text = blog.content.replace(/<[^>]*>?/gm, '')
     const words = text.split(/\s+/).length
-    const time = Math.ceil(words / 200) // Reading time logic
+    const time = Math.ceil(words / 200) 
     setReadingTime(time)
   }, [blog.content])
+
+  const handleFollow = () => {
+    setIsFollowing(!isFollowing);
+  };
+   
+
+  const confettiConfig = {
+    angle: 90,
+    spread: 45,
+    startVelocity: 20,
+    elementCount: 70,
+    dragFriction: 0.12,
+    duration: 3000,
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    colors: ["#ffae00", "#ff004c", "#6b00ff", "#00c4ff"]
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
@@ -91,13 +112,24 @@ export const FullBlog = ({ blog }: FullBlogProps) => {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  {blog.author.description || "This is a detailed explanation about the user and author's ability to grab attention to users."}
+                  {blog.author.description || "Hey, my name is Adarsh Singh. I am a student currently pursuing a Bachelor of Technology in Information Technology from MAIT, Rohini, Delhi. I am a passionate full-stack web developer with a keen interest in learning and exploring new technologies."}
                 </p>
-                <div className="mt-6">
-                  <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-colors duration-200">
-                    Follow Author
-                  </button>
-                </div>
+                <div className="relative inline-block mt-5 w-full">
+      <button
+        className={`w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform ${
+          isFollowing ? "scale-105" : ""
+        } hover:from-purple-600 hover:to-pink-600 transition-colors duration-200 ease-in-out`}
+        onClick={handleFollow}
+      >
+        {isFollowing ? "Following Author" : "Follow Author"}
+      </button>
+      <Confetti active={isFollowing} config={confettiConfig} />
+      {isFollowing && (
+        <p className="text-green-500 font-semibold mt-2 animate-bounce">
+          You are now following the author!
+        </p>
+      )}
+    </div>
               </div>
             </motion.div>
           </div>

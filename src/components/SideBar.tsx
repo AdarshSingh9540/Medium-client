@@ -26,7 +26,7 @@ function SideBar({ isOpen, toggleSidebar }: SideBarProps) {
     localStorage.removeItem('name')
     setIsAuthenticated(false)
 
-    navigate('/signin')
+    navigate('/')
   }
 
   const authenticatedMenuItems = [
