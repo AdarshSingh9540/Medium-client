@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
 import { motion } from 'framer-motion'
-import { CalendarDays, Clock, ChevronLeft } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { CalendarDays, Clock, ChevronLeft, Share2 } from 'lucide-react'
+import { Link, useParams } from 'react-router-dom'
 import Confetti from "react-dom-confetti";
+import toast from 'react-hot-toast'
 
 interface BlogSchema {
   title: string
@@ -23,6 +24,7 @@ interface FullBlogProps {
 
 
 export const FullBlog = ({ blog }: FullBlogProps) => {
+  const { id } = useParams<{ id: string }>();
   const [readingTime, setReadingTime] = useState<number>(0)
   const [isFollowing,setIsFollowing] = useState(false);
 
@@ -51,6 +53,20 @@ export const FullBlog = ({ blog }: FullBlogProps) => {
     colors: ["#ffae00", "#ff004c", "#6b00ff", "#00c4ff"]
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: blog.title,  
+      text: blog.content.replace(/<[^>]*>?/gm, '').slice(0, 100) + '...',  
+      url: `https://indiblog.vercel.app/blog/${id}`, 
+    };
+
+    try {
+      await navigator.share(shareData);
+      toast.success('Blog has been shared successfully!', { duration: 3000 }); 
+    } catch (err) {
+      console.error('Error sharing content:', err);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
       <motion.div 
@@ -70,9 +86,12 @@ export const FullBlog = ({ blog }: FullBlogProps) => {
               whileHover={{ boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
             >
               <div className="p-6 sm:p-10">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+               <div className='flex justify-between'>
+               <h1 className="text-2xl  lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
                   {blog.title}
                 </h1>
+                <Share2 onClick={handleShare} className='cursor-pointer h-8 w-8'/>
+               </div>
                 <div className="flex flex-wrap items-center space-x-4 text-sm text-gray-500 mb-6">
                   <div className="flex items-center">
                     <CalendarDays className="w-4 h-4 mr-2 text-purple-500" />
@@ -83,12 +102,14 @@ export const FullBlog = ({ blog }: FullBlogProps) => {
 </span>
 
                   </div>
+                  
                   <div className="hidden sm:block w-1 h-1 bg-purple-300 rounded-full"></div>
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-2 text-purple-500" />
                     <span>{readingTime} min read</span>
                   </div>
                 </div>
+               
                 <div className="prose prose-lg max-w-none">
                   {parse(blog.content)}
                 </div>

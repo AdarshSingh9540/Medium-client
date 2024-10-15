@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CalendarDays, Clock, ChevronRight } from 'lucide-react'
-
+import { CalendarDays, Clock, ChevronRight,Share2 } from 'lucide-react'
+import { toast } from 'react-hot-toast'
 interface BlogCardProps {
   authorName: string
   title: string
@@ -24,6 +24,20 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
   const cleanContent = stripHtmlTags(content)
   const previewContent = cleanContent.slice(0, 250) 
 
+  const handleShare = async () => {
+    const shareData = {
+      title: title,
+      text: cleanContent,
+      url: `https://indiblog.vercel.app/blog/${id}`, 
+    };
+
+    try {
+      await navigator.share(shareData);
+      toast.success('Blog has been shared successfully!', { duration: 3000 }); 
+    } catch (err) {
+      console.error('Error sharing content:', err);
+    }
+  };
   return (
     <Link to={`/blog/${id}`}>
       <motion.div
@@ -33,7 +47,8 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
         onHoverEnd={() => setIsHovered(false)}
       >
         <div className="p-6">
-          <div className="flex items-center mb-4">
+          <div className="flex items-center justify-between  mb-4">
+            <div className='flex'>
             <Avatar name={authorName} />
             <div className="ml-3">
               <span className="font-semibold text-gray-800 text-lg">{authorName || 'Unknown Author'}</span>
@@ -41,7 +56,11 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
                 <CalendarDays className="w-4 h-4 mr-1" />
                 {new Date(publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
+              
             </div>
+            </div>
+            <Share2 onClick={handleShare} />
+             
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-3 line-clamp-2 hover:text-purple-700 transition-colors duration-200">{title}</h2>
           <p className="text-gray-600 mb-4 line-clamp-3">
@@ -59,7 +78,9 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
             >
               Read more
               <ChevronRight className="w-4 h-4 ml-1" />
+        
             </motion.div>
+            
           </div>
         </div>
       </motion.div>

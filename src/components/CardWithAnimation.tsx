@@ -7,7 +7,7 @@ export default function CardWithAnimation() {
     <div className='bg-white rounded-2xl shadow-2xl overflow-hidden py-10'>
       <div className="py-12">
         <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <p className="text-indigo-600 font-semibold tracking-wide uppercase">
+          <p className="text-purple-600 font-semibold tracking-wide uppercase">
             How We Can Help
           </p>
           <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -53,7 +53,7 @@ export default function CardWithAnimation() {
                 <h3 className="text-xl font-semibold mb-2 text-slate-800">
                   {feature.title}
                 </h3>
-                <p className="text-indigo-900">{feature.description}</p>
+                <p className="text-slate-600">{feature.description}</p>
               </div>
             </div>
           ))}

@@ -27,7 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
     localStorage.removeItem('name')
     setIsAuthenticated(false)
     setUserName('')
-    navigate('/signin')
+    navigate('/')
   }
 
   return (
@@ -69,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
                     <span className="mr-1">Logout</span>
-                    <LogOut  className="w-3 h-3" />
+                    <LogOut  className="w-2 h-2" />
                   </motion.div>
 
                   <AnimatePresence>
@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                       >
                         <span className="mr-1">Confirm</span>
-                        <LogOut className="w-3 h-3" />
+                        <LogOut className="w-2 h-2" />
                       </motion.div>
                     )}
                   </AnimatePresence>
