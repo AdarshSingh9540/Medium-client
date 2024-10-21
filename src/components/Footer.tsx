@@ -3,11 +3,11 @@ import {  Instagram, Twitter, Facebook, Linkedin, Mail } from 'lucide-react'
 export default function Footer() {
   return (
     <footer 
-    style={{
-        backgroundColor: "#6c33a3", 
-        backgroundImage: "linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)"
-      }}
-    className=" text-white py-16">
+    // style={{
+    //     backgroundColor: "#6c33a3", 
+    //     backgroundImage: "linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)"
+    //   }}
+    className=" text-white py-16 bg-[#1f2937] ">
     <div className="container mx-auto px-4">
       <div className="flex flex-col lg:flex-row justify-between  lg:px-[5rem] gap-8">
         <div className="mb-8 md:mb-0">
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="mt-12 pt-8 border-t border-purple-800 text-center text-purple-300">
+      <div className="mt-12 pt-8 border-t border-gray-600 text-center text-white">
         <p>&copy; 2024 IndiBlog. All rights reserved.</p>
       </div>
     </div>
