@@ -1,15 +1,11 @@
 "use client";
-
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
 import Footer from "./Footer";
 import CardWithAnimation from "./CardWithAnimation";
 import AISuggestionWidget from "./AiSuggestion";
 import CTASection from "./MessageBanner";
 
 export default function LandingPage() {
-  const [email, setEmail] = useState("");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white text-gray-800">

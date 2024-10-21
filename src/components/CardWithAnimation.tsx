@@ -33,10 +33,10 @@ export default function CardWithAnimation() {
           <p className="text-purple-600 font-semibold tracking-wide uppercase">
             How We Can Help
           </p>
-          <h2 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="mt-2 text-xl lg:text-3xl font-extrabold text-gray-900 ">
             Enhance Your Blogging Experience
           </h2>
-          <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="mt-4 text-md lg:text-xl text-gray-600 max-w-3xl mx-auto">
             From AI-Generated Content to SEO-Optimized Templates, our platform empowers you to create, manage, and grow your blog with ease.
           </p>
         </motion.div>

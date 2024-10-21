@@ -103,7 +103,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white text-gray-800">
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-16 text-center text-gray-800">Spark Your Creativity</h2>
+          <h2 className="text-2xl lg:text-4xl font-bold mb-16 text-center text-gray-800">Spark Your Creativity</h2>
           <AISuggestionWidget />
         </div>
       </section>
