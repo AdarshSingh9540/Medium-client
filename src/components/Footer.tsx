@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="flex flex-col lg:flex-row justify-between  lg:px-[5rem] gap-8">
         <div className="mb-8 md:mb-0">
           <h3 className="text-2xl font-bold mb-4">IndiBlog</h3>
-          <p className="text-purple-200">Empowering bloggers with AI-driven tools and insights.</p>
+          <p className="text-white">Empowering bloggers with AI-driven tools and insights.</p>
         </div>
         <div>
           <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
