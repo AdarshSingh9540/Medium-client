@@ -7,7 +7,7 @@ export default function Footer() {
     //     backgroundColor: "#6c33a3", 
     //     backgroundImage: "linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)"
     //   }}
-    className=" text-white py-16 bg-[#1f2937] ">
+    className=" text-white py-16 bg-[#1f2937] relative">
     <div className="container mx-auto px-4">
       <div className="flex flex-col lg:flex-row justify-between  lg:px-[5rem] gap-8">
         <div className="mb-8 md:mb-0">
@@ -40,6 +40,16 @@ export default function Footer() {
         <p>&copy; 2024 IndiBlog. All rights reserved.</p>
       </div>
     </div>
+
+    <div className="absolute left-0 bottom-0 z-10">
+        <img
+          src="https://res.cloudinary.com/dzvdh7yez/image/upload/v1729584353/Vector_fapfat.png"
+          alt="Paper airplane icon"
+          width={300}
+          height={300}
+          className="opacity-50"
+        />
+      </div>
   </footer>
   )
 }

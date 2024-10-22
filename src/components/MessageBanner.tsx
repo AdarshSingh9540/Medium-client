@@ -20,6 +20,7 @@ export default function CTASection() {
           Start Blogging
         </button>
       </a>
+
     </section>
   );
 }
