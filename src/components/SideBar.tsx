@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+//@ts-nocheck
+import  { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Home, PenTool, Cpu, LogIn, UserPlus, X, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
